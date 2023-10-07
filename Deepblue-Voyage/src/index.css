@@ -16,8 +16,6 @@ video {
 }
 
 .button {
-  position: absolute;
-  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

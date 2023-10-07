@@ -20,8 +20,8 @@ function App() {
 
           <ParallaxLayer offset={1} speed={-2} factor={1.5} horizontal />
 
-          <ParallaxLayer offset={3} speed={1}>
-            <button onClick={() => ref.current.scrollTo(0)} className="button">
+          <ParallaxLayer offset={3.45} speed={1} className="button">
+            <button onClick={() => ref.current.scrollTo(0)}>
               Scroll to top
             </button>
           </ParallaxLayer>
