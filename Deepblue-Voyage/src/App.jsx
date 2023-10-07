@@ -21,9 +21,9 @@ function App() {
             <Home />
           </ParallaxLayer>
 
-          <ParallaxLayer offset={2} >
+          {/* <ParallaxLayer offset={2} >
             <SecondSection />
-          </ParallaxLayer>
+          </ParallaxLayer> */}
 
           <ParallaxLayer offset={3.45} speed={1} className="button">
             <ArrowCircleUpIcon

@@ -1,3 +1,7 @@
+import { Viewer } from "cesium";
+import "cesium/Build/Cesium/Widgets/widgets.css";
+
 export const rightSection = () => {
-  return <div>rightSection</div>;
+  const viewer = new Viewer("cesiumContainer");
+  return viewer();
 };
