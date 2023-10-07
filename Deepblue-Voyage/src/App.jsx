@@ -1,12 +1,11 @@
 // import { QueryClientProvider, QueryClient } from "react-query";
 import { useRef } from "react";
-import Home from "./components/main/Home";
+import Home from "./components/Home/Home";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import "./index.css";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
-import SecondSection from "./components/secondSection/secondSection";
-
-
+import SecondSection from "../src/components/SecondSection/SecondSection";
+import ThirdSection from "./components/ThirdSection/ThirdSection";
 function App() {
   const ref = useRef();
   return (
@@ -16,16 +15,17 @@ function App() {
     // eslint-disable-next-line react/jsx-no-comment-textnodes
     <>
       <div>
-        <Parallax pages={4} ref={ref}>
-          <ParallaxLayer offset={0} speed={1}>
+        <Parallax pages={5} ref={ref}>
+          <ParallaxLayer speed={2.5}>
             <Home />
           </ParallaxLayer>
-
-          {/* <ParallaxLayer offset={2} >
+          <ParallaxLayer offset={1}>
             <SecondSection />
-          </ParallaxLayer> */}
-
-          <ParallaxLayer offset={3.45} speed={1} className="button">
+          </ParallaxLayer>
+          <ParallaxLayer offset={1} speed={1}>
+            <ThirdSection />
+          </ParallaxLayer>
+          <ParallaxLayer offset={3} speed={1} className="button">
             <ArrowCircleUpIcon
               fontSize="large"
               onClick={() => ref.current.scrollTo(0)}
@@ -33,9 +33,6 @@ function App() {
             <p>Scroll to top</p>
           </ParallaxLayer>
         </Parallax>
-      </div>
-      <div>
-        <SecondSection />
       </div>
     </>
   );
