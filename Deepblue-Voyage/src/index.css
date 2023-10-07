@@ -14,3 +14,10 @@ video {
   height: 100%;
   object-fit: cover;
 }
+
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
