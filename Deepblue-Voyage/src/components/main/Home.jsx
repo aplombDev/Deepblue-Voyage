@@ -3,7 +3,7 @@ import "../../index.css";
 const Home = () => {
   return (
     <div className="main">
-      <video src={videoBg} autoPlay loop muted/>
+      <video src={videoBg} autoPlay loop muted />
     </div>
   );
 };
