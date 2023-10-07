@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
     <div className="main">
-      <video src={videoBg} autoPlay loop muted/>
+      <video src={videoBg} autoPlay loop muted />
     </div>
     <div>
       <h1 className="main-title">Deepblue Voyage</h1>

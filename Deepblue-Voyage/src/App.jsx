@@ -3,6 +3,9 @@ import { useRef } from "react";
 import Home from "./components/main/Home";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import "./index.css";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
+import SecondSection from "./components/secondSection/secondSection";
+
 
 function App() {
   const ref = useRef();
@@ -18,14 +21,21 @@ function App() {
             <Home />
           </ParallaxLayer>
 
-          <ParallaxLayer offset={1} speed={-2} factor={1.5} horizontal />
+          {/* <ParallaxLayer offset={2} >
+            <SecondSection />
+          </ParallaxLayer> */}
 
           <ParallaxLayer offset={3.45} speed={1} className="button">
-            <button onClick={() => ref.current.scrollTo(0)}>
-              Scroll to top
-            </button>
+            <ArrowCircleUpIcon
+              fontSize="large"
+              onClick={() => ref.current.scrollTo(0)}
+            ></ArrowCircleUpIcon>
+            <p>Scroll to top</p>
           </ParallaxLayer>
         </Parallax>
+      </div>
+      <div>
+        <SecondSection />
       </div>
     </>
   );
