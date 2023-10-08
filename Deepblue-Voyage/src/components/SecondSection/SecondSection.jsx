@@ -2,12 +2,11 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
-// import NASA1 from "../../assets/images/jpg/nasa1.jpg";
-import EarthBg from "../../assets/EarthBg-unscreen.gif";
+import EarthBg from "../../assets/EarthBg.mp4";
 import AquaImg from "../../assets/images/jpg/Aqua.jpg";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
