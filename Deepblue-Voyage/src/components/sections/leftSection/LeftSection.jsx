@@ -1,47 +1,203 @@
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import { Color } from 'cesium';
 
-function QuizShow({question,options,correct_option}) {
-    const questionTitle = {
-        color: "black",
-        paddingTop: "10px",
-        paddingBottom: "30px",
-        borderRadius: "5px",
-      };
+// CSS for the circular timer
+const circularTimerStyles = {
+  timerContainer: {
+    position: 'relative',
+    width: '100px',
+    height: '100px',
+    margin: '20px 20px 20px 0', // Updated margin to move it to the left
+    float: 'left', // Added float to align it to the left
+  },
+  timerValue: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    zIndex: '2',
+  },
+ 
+};
 
-      const card = {
+function QuizShow({ QuizData }) {
+  const [count, setCount] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [score, setScore] = useState(0);
+  const [time, setTime] = useState(10);
+  const [timerRunning, setTimerRunning] = useState(true);
+  const [questionsAttempted, setQuestionsAttempted] = useState(0);
+  const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
 
-    alignItems: "center",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    marginTop: "5px",
-    backgroundColor: "#02BFE7",
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      if (time > 0 && timerRunning) {
+        setTime(time - 1);
+      } else if (timerRunning) {
+        handleNext();
       }
-    return (
-      <>
-        <div className="" style={card}>
+    }, 1000);
 
-    <h1 className='' style={questionTitle}>{question}</h1>        
-    <div className='pt-30 mt-30 text-white' >
-    <div>
-    <Button variant="contained" style={{backgroundColor: "#02BFE7", color: "white", width: "100%", marginBottom: "10px"}}>{options[0]}</Button>
-    <Button variant="contained" style={{backgroundColor: "#02BFE7", color: "white", width: "100%", marginBottom: "10px"}}>{options[1]}</Button>
-    <Button variant="contained" style={{backgroundColor: "#02BFE7", color: "white", width: "100%", marginBottom: "10px"}}>{options[2]}</Button>
-    <Button variant="contained" style={{backgroundColor: "#02BFE7", color: "white", width: "100%", marginBottom: "10px"}}>{options[3]}</Button>
-    <Button variant="contained" style={{backgroundColor: "#02BFE7", color: "white", width: "100%", marginBottom: "10px",alignItems: "flex-end",display:"flex",flexDirection:"column"}}><Button style={{backgroundColor: "green", color: "white"}}>Next</Button></Button>
-    
-    <div className="text-left">
-    
-    </div>
-    </div>
-    </div>
-       
-        </div>
-      </>
-    );
+    return () => clearInterval(timerInterval);
+  }, [time, timerRunning]);
+
+  useEffect(() => {
+    if (count < QuizData.length) {
+      setTimerRunning(true);
+      setTime(10);
+      setNextButtonDisabled(true);
+    } else {
+      setTimerRunning(false);
+    }
+  }, [count, QuizData]);
+
+  function handleNext() {
+    setQuestionsAttempted(questionsAttempted + 1);
+
+    if (selectedAnswer === QuizData[count].correct_option) {
+      setScore(score + 1);
+    }
+
+    setCount(count + 1);
+    setSelectedAnswer(null);
+    setNextButtonDisabled(true);
   }
+
+  const questionTitle = {
+    color: 'black',
+    paddingTop: '10px',
+    paddingBottom: '30px',
+    borderRadius: '5px',
+  };
+
+  const card = {
+    alignItems: 'center',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    marginTop: '5px',
+    // backgroundColor: '#02BFE7',
+  };
+
+  const scoreStyle = {
+    color: 'black',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    marginBottom: '10px',
+    textAlign: 'center',
+  };
+
+  const topInfoStyle = {
+    color: 'black',
+    fontSize: '16px',
+    marginTop: '20px',
+    textAlign: 'right',
+    
+  };
+
+  const handleAnswerClick = (answer) => {
+    if (timerRunning) {
+      setTimerRunning(false);
+      setNextButtonDisabled(false);
+    }
+
+    if (answer === QuizData[count].correct_option) {
+      setSelectedAnswer(answer);
+    } else {
+      setSelectedAnswer(answer);
+      setTimeout(() => {
+        setSelectedAnswer(QuizData[count].correct_option);
+      }, 1000);
+    }
+  };
+
+  return (
+    <>
+      <div className="" style={card}>
+        <div style={circularTimerStyles.timerContainer}>
+          <div style={circularTimerStyles.timerValue}>{time}</div>
+          <svg
+            className="circular-progress"
+            style={circularTimerStyles.circularProgress}
+          >
+            <circle
+              className="circle"
+              cx="50%"
+              cy="50%"
+              r="45%"
+              strokeWidth="5%"
+              fill="transparent"
+              strokeDasharray="283"
+              strokeDashoffset={(283 * (10 - time)) / 10}
+            ></circle>
+          </svg>
+        </div>
+        <div style={topInfoStyle}>
+          Attempted: {questionsAttempted}/{QuizData.length}
+        </div>
+        <div style={scoreStyle}>
+          Score: {score}/{questionsAttempted}
+        </div>
+        <h1 className="" style={questionTitle}>
+          {QuizData[count].question}
+        </h1>
+        <div className="pt-30 mt-30 text-white">
+          <div>
+            {QuizData[count].options.map((option, index) => (
+              <Button
+                key={index}
+                variant="contained"
+                style={{
+                  backgroundColor:
+                    selectedAnswer === option
+                      ? option === QuizData[count].correct_option
+                        ? 'green'
+                        : 'red'
+                      : '',
+                  color: 'white',
+                  width: '100%',
+                  marginBottom: '10px',
+                }}
+                onClick={() => handleAnswerClick(option)}
+                disabled={!timerRunning}
+              >
+                {option}
+              </Button>
+            ))}
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: 'green',
+                color: 'white',
+                width: '100%',
+                marginBottom: '10px',
+                float: 'right',
+              }}
+              onClick={handleNext}
+              disabled={nextButtonDisabled}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   function QuizPostShow() {
    const QuizData =  [
@@ -98,7 +254,7 @@ function QuizShow({question,options,correct_option}) {
     {
       question: "Which animal has a long, sticky tongue and loves to eat ants in the ocean?",
       options: ["Penguin", "Kangaroo", "Seahorse", "Anteater"],
-      correct_option: "AnteaterSeahorse"
+      correct_option: "Anteater"
     },
     {
       question: "What's the name of the pirate's treasure that's sometimes found buried in the sand under the ocean?",
@@ -162,9 +318,7 @@ function QuizShow({question,options,correct_option}) {
           ></QuizShow>
         ))} */}
         <QuizShow
-            question={QuizData[0].question}
-            options={QuizData[0].options}
-            correct_option={QuizData[0].correct_option}
+           QuizData={QuizData}
           ></QuizShow>
       </>
     );
