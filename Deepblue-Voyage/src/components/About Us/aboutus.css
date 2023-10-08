@@ -1,0 +1,68 @@
+/* No changes to body or other styles, keep them as they are */
+
+.about-us-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.about-us-container h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.about-us-container p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Remove visualization-container styles */
+
+/* Adjust grid-item styles for proper display */
+.Item {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column; /* This ensures each item takes up one row */
+  align-items: center; /* Center content vertically */
+  text-align: center; /* Center text */
+}
+
+.Item img {
+  max-width: 100%;
+  border-radius: 50%;
+  margin-bottom: 10px; /* Add some spacing between image and name */
+}
+
+.Item h3 {
+  font-size: 24px;
+  margin: 0; /* Remove margin for the h3 element */
+  color: #333;
+}
+
+.Item a {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.Item a:hover {
+  text-decoration: underline;
+}
+
+.copyright-text {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+  color: #555;
+}

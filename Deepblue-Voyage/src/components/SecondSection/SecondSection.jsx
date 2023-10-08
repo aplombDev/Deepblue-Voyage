@@ -3,9 +3,10 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
 // import NASA1 from "../../assets/images/jpg/nasa1.jpg";
-import EarthBg from "../../assets/images/gif/EarthBg.gif";
+import EarthBg from "../../assets/aa.mp4"
 // import AquaImg from "../../assets/images/jpg/Aqua.jpg";
-import LeftSection from "../SecondSection/Sections/LeftSection/LeftSection";
+// import LeftSection from "../SecondSection/Sections/LeftSection/LeftSection";
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#02BFE7",
@@ -27,7 +28,11 @@ export default function SecondSection() {
       <Grid container spacing={2} columns={16}>
         <Grid xs={8}>
           <Item>
-            <LeftSection />
+            <iframe
+              src="https://climate.nasa.gov/quizzes/sea-level-quiz/"
+              width="916"
+              height="620"
+            />
           </Item>
         </Grid>
         <Grid xs={8}>
@@ -42,7 +47,7 @@ export default function SecondSection() {
               width: "100%",
             }}
           >
-            <img src={EarthBg} alt="EarthBg" />
+            <video src={EarthBg} autoPlay alt="EarthBg" />
           </Item>
         </Grid>
       </Grid>
