@@ -9,6 +9,7 @@ import ThirdSection from "../src/components/ThirdSection/ThirdSection";
 import { Typography, createMuiTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import AquaImg from "../src/assets/images/jpg/Aqua.jpg";
+import AboutUs from "./components/About Us/AboutUs";
 function App() {
   const ref = useRef();
   const theme = createMuiTheme({
@@ -72,6 +73,10 @@ function App() {
               >
                 About Us
               </Typography>
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={3.3} sticky={{ start: 3.3, end: 3.4 }}>
+              <AboutUs />
             </ParallaxLayer>
 
             <ParallaxLayer
