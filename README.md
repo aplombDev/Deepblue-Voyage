@@ -51,7 +51,7 @@ DeepBlue Voyage engages users through captivating animations, real-time NASA qui
 
 **6. How to Run**
 1. Clone the repository:
-git clone https://github.com/cosmicgz/Deepblue-Voyage
+git clone https://github.com/Joshi-aayush/Deepblue-Voyage
 
 2. Navigate to the project directory:
 cd Deepblue-Voyage
